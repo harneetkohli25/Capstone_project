@@ -51,13 +51,9 @@ def hospital_clean():
 def patients_clean():
     patients_df = spark.read.format("delta").load("dbfs:/pipelines/11f3fb9c-5faa-4330-a561-482fe8b7240c/tables/patients_raw/")
 
-    patients_df = patients_df.withColumn("dob",
-                                         when(col("dob").isNotNull() & (col("dob").rlike("\\d{4}-\\d{2}-\\d{2}")),
-                                              col("dob").cast("date"))
-                                         .when(col("dob").isNotNull(), to_date(col("dob"), "dd-MM-yyyy"))
-                                         .otherwise(None))
-
-    # Convert 'dob' column to the desired format
+    patients_df = patients_df.withColumn("dob", to_date(col("dob"), "dd-MM-yyyy"))
+    
+    # Convert 'dob' columns to the desired format
     patients_df = patients_df.withColumn("dob", date_format(col("dob"), "dd/MM/yyyy"))
 
     # Write the cleaned DataFrame as a Delta Live table
