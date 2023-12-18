@@ -113,14 +113,24 @@ def plans_clean():
     "pipelines.autoOptimize.managed": "true"
   }
 )
+
+
 def new_admissions_partition_clean():
     new_admissions_partition_df = spark.read.format("delta").load("dbfs:/pipelines/11f3fb9c-5faa-4330-a561-482fe8b7240c/tables/new_admissions_partition_raw/")
 
 
-    # Write the cleaned DataFrame as a Delta Live table
-    new_admissions_partition_df.write.format("delta").mode("append").partitionBy("outcome").saveAsTable("new_admissions_partition_clean")
+    df = new_admissions_partition_df.withColumn(
+    "D_O_A",
+    when(new_admissions_partition_df["D_O_A"].contains("-"), date_format(to_date(new_admissions_partition_df["D_O_A"], "dd-MM-yyyy"), "dd/MM/yyyy"))
+    .when(new_admissions_partition_df["D_O_A"].contains("/"), date_format(to_date(new_admissions_partition_df["D_O_A"], "M/dd/yyyy"), "dd/MM/yyyy"))
+    .otherwise(to_date(new_admissions_partition_df["D_O_A"], "dd/MM/yyyy"))
+   
+)
 
-    return new_admissions_partition_df
+    df.write.format("delta").mode("append").partitionBy("outcome").saveAsTable("new_admissions_partition_clean")
+
+    return df
+
 
 # COMMAND ----------
 
