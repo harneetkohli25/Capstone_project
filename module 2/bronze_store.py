@@ -107,4 +107,98 @@ def policies_raw():
 
 # COMMAND ----------
 
+display(dbutils.fs.ls("/mnt/wecure001/dataset/incrementunzipped_data"))
+
+# COMMAND ----------
+
+@dlt.create_table(
+  comment="The Raw incremnetal admission Table",
+  table_properties={
+    "wecure.quality": "bronze",
+    "pipelines.autoOptimize.managed": "true"
+  }
+)
+def admission_new_raw_2():
+    admission_2_df = spark.read.csv("dbfs:/mnt/wecure001/dataset/incrementunzipped_data/new_admissions_partition_2.csv", header=True, inferSchema=True)
+    admission_2_df = admission_2_df.withColumnRenamed("D.O.A", "D_O_A") \
+    .withColumnRenamed("TYPE OF ADMISSION-EMERGENCY/OPD", "type_of_admission") \
+    .withColumnRenamed("DURATION OF STAY", "duration_of_stay") \
+    .withColumnRenamed("OUTCOME", "outcome") \
+    .withColumnRenamed("duration of intensive unit stay", "duration_of_intensive_unit_stay")
+    return admission_2_df
+
+# COMMAND ----------
+
+@dlt.create_table(
+  comment="The Raw incremnetal admission Table",
+  table_properties={
+    "wecure.quality": "bronze",
+    "pipelines.autoOptimize.managed": "true"
+  }
+)
+def admission_new_raw_3():
+    admission_3_df = spark.read.csv("dbfs:/mnt/wecure001/dataset/incrementunzipped_data/new_admissions_partition_3.csv", header=True, inferSchema=True)
+    admission_3_df = admission_3_df.withColumnRenamed("D.O.A", "D_O_A") \
+    .withColumnRenamed("TYPE OF ADMISSION-EMERGENCY/OPD", "type_of_admission") \
+    .withColumnRenamed("DURATION OF STAY", "duration_of_stay") \
+    .withColumnRenamed("OUTCOME", "outcome") \
+    .withColumnRenamed("duration of intensive unit stay", "duration_of_intensive_unit_stay")
+    return admission_3_df
+
+# COMMAND ----------
+
+@dlt.create_table(
+  comment="The Raw incremnetal admission Table",
+  table_properties={
+    "wecure.quality": "bronze",
+    "pipelines.autoOptimize.managed": "true"
+  }
+)
+def admission_new_raw_4():
+    admission_4_df = spark.read.csv("dbfs:/mnt/wecure001/dataset/incrementunzipped_data/new_admissions_partition_4.csv", header=True, inferSchema=True)
+    admission_4_df = admission_4_df.withColumnRenamed("D.O.A", "D_O_A") \
+    .withColumnRenamed("TYPE OF ADMISSION-EMERGENCY/OPD", "type_of_admission") \
+    .withColumnRenamed("DURATION OF STAY", "duration_of_stay") \
+    .withColumnRenamed("OUTCOME", "outcome") \
+    .withColumnRenamed("duration of intensive unit stay", "duration_of_intensive_unit_stay")
+    return admission_4_df
+
+# COMMAND ----------
+
+@dlt.create_table(
+  comment="The Raw incremnetal admission Table",
+  table_properties={
+    "wecure.quality": "bronze",
+    "pipelines.autoOptimize.managed": "true"
+  }
+)
+def admission_new_raw_5():
+    admission_5_df = spark.read.csv("dbfs:/mnt/wecure001/dataset/incrementunzipped_data/new_admissions_partition_5.csv", header=True, inferSchema=True)
+    admission_5_df = admission_5_df.withColumnRenamed("D.O.A", "D_O_A") \
+    .withColumnRenamed("TYPE OF ADMISSION-EMERGENCY/OPD", "type_of_admission") \
+    .withColumnRenamed("DURATION OF STAY", "duration_of_stay") \
+    .withColumnRenamed("OUTCOME", "outcome") \
+    .withColumnRenamed("duration of intensive unit stay", "duration_of_intensive_unit_stay")
+    return admission_5_df
+
+# COMMAND ----------
+
+@dlt.create_table(
+  comment="The Raw incremnetal admission Table",
+  table_properties={
+    "wecure.quality": "bronze",
+    "pipelines.autoOptimize.managed": "true"
+  }
+)
+def admission_new_raw_6():
+    admission_6_df = spark.read.csv("dbfs:/mnt/wecure001/dataset/incrementunzipped_data/new_admissions_partition_6.csv", header=True, inferSchema=True)
+    admission_6_df = admission_6_df.withColumnRenamed("D.O.A", "D_O_A") \
+    .withColumnRenamed("TYPE OF ADMISSION-EMERGENCY/OPD", "type_of_admission") \
+    .withColumnRenamed("DURATION OF STAY", "duration_of_stay") \
+    .withColumnRenamed("OUTCOME", "outcome") \
+    .withColumnRenamed("duration of intensive unit stay", "duration_of_intensive_unit_stay")
+    return admission_6_df
+
+# COMMAND ----------
+
 
